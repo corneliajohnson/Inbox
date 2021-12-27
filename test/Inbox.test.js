@@ -43,7 +43,9 @@ describe("Inbox", () => {
 
   //test that the messgae string is modified
   it('can change the message', async ()=>{
-    await inbox.methods.setMessage("new message").send({from: accounts[0]});
+    //return a hash value if sucessfull no need for an ok assertion. 
+    //If no has is is return test will fail
+    await inbox.methods.setMessage("new message").send({from: accounts[0]}); 
     const message = await inbox.methods.message().call();
     assert.ok.strictEqual(message, "new message");
   });
