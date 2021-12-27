@@ -35,8 +35,16 @@ describe("Inbox", () => {
     assert.ok(inbox.options.address)
   });
 
+    //test that the intiail message sting has a value
   it("has a default message", async ()=>{
     const message = await inbox.methods.message().call();
     assert.strictEqual(message, INTITAL_STRING);
+  });
+
+  //test that the messgae string is modified
+  it('can change the message', async ()=>{
+    await inbox.methods.setMessage("new message").send({from: accounts[0]});
+    const message = await inbox.methods.message().call();
+    assert.ok.strictEqual(message, "new message");
   });
 });
